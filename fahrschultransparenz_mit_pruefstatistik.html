@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="referrer" content="strict-origin-when-cross-origin"><title>FahrschulTransparenz</title>
+<style>
+:root{font-family:system-ui,Arial,sans-serif;color:#172033;background:#f3f6fb}*{box-sizing:border-box}body{margin:0}header{background:#13213b;color:white;padding:28px max(20px,calc((100% - 1160px)/2))}header p{color:#d5deef;max-width:760px}main{max-width:1160px;margin:24px auto;padding:0 16px}.note{background:#fff5dc;border:1px solid #edd28b;padding:14px;border-radius:12px;margin-bottom:18px}.cols{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;align-items:start}.panel{background:white;border:1px solid #dce3ec;border-radius:14px;padding:18px;box-shadow:0 4px 16px #17203308}h1{margin:5px 0;font-size:34px}h2{margin:0 0 14px;font-size:20px}h3{font-size:16px;margin:22px 0 10px;border-top:1px solid #e5eaf1;padding-top:14px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.field{display:flex;flex-direction:column;gap:5px}.full{grid-column:1/-1}label{font-size:13px;font-weight:700}input,select,textarea{font:inherit;padding:10px;border:1px solid #cbd5e1;border-radius:8px;width:100%}textarea{min-height:70px}.hint,.muted{font-size:12px;color:#64748b}.buttons{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}button{background:#2457d6;color:white;border:0;border-radius:8px;padding:11px 14px;font-weight:700;cursor:pointer}button.alt{background:#eaf0ff;color:#2449a7}#preview{border:1px solid #dce3ec;border-radius:10px;padding:16px;min-height:180px}#preview h2{font-size:23px;margin-bottom:3px}#preview h3{border:0;padding:0;margin:18px 0 7px}#preview table{width:100%;border-collapse:collapse;font-size:13px}#preview td{padding:7px 3px;border-bottom:1px solid #e5eaf1}#preview td:last-child{text-align:right;font-weight:bold}#preview .tags span{display:inline-block;background:#eaf0ff;color:#2449a7;padding:4px 8px;border-radius:20px;margin:3px;font-size:12px}#preview .stats{display:flex;gap:8px}#preview .metric{background:#f1f5fa;padding:10px;border-radius:8px;flex:1}#preview .metric b{display:block;font-size:20px}#code{background:#111c30;color:#e6edff;min-height:160px;font:12px/1.4 monospace}footer{font-size:12px;color:#64748b;margin-top:16px}
+.report-section{margin-top:18px}.report-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+.stat-card{background:#f1f5fa;border-radius:10px;padding:12px}.stat-card strong{display:block;font-size:25px}
+.report-list{width:100%;border-collapse:collapse;font-size:13px;margin-top:12px}.report-list th,.report-list td{text-align:left;padding:8px 5px;border-bottom:1px solid #e5eaf1}
+.report-list td:last-child{text-align:right}.mini-btn{padding:6px 9px;font-size:12px;background:#eaf0ff;color:#2449a7;margin-left:4px}
+.status{font-size:12px;color:#64748b}.success{color:#087f5b}.warning{color:#9a6700}
+@media(max-width:850px){.cols{grid-template-columns:1fr}}@media(max-width:520px){.grid{grid-template-columns:1fr}.full{grid-column:auto}#preview .stats{flex-direction:column}}
+</style></head><body>
+<header><div style="max-width:1160px;margin:auto"><div style="color:#a9c0ff;font-size:12px;letter-spacing:.12em;font-weight:bold">FAHRSCHULTRANSPARENZ · BETA</div><h1>Eine klare Informationsseite für jede Fahrschule.</h1><p>Angaben eintragen, Vorschau prüfen und einen HTML-Abschnitt für die eigene Website erzeugen.</p></div></header>
+<main><div class="note"><b>Rechtlicher Hinweis:</b> Dieses Tool ist eine freiwillige Informationshilfe, keine amtliche Meldestelle und keine Rechtsberatung. Gesetzliche Pflichten, Datenformate und Fristen müssen anhand der endgültig verkündeten Regelungen geprüft werden. Prüfungsergebnisse nur mit belastbarer Datenquelle und Bezugszeitraum veröffentlichen.</div>
+<div class="cols"><section class="panel"><h2>1. Angaben der Fahrschule</h2><div class="grid">
+<div class="field full"><label for="school">Name der Fahrschule</label><input id="school" placeholder="Fahrschule Muster"></div>
+<div class="field"><label for="address">Standort / Anschrift</label><input id="address" placeholder="Straße, PLZ Ort"></div><div class="field"><label for="contact">Telefon / E-Mail</label><input id="contact" placeholder="Kontakt"></div>
+<div class="field"><label for="website">Website</label><input id="website" placeholder="https://..."></div><div class="field"><label for="classes">Fahrerlaubnisklassen</label><input id="classes" placeholder="B, B197, BE"></div></div>
+<h3>2. Preise (Euro)</h3><p class="hint">Bitte Fahrschulentgelte von externen Prüfstellengebühren unterscheiden.</p><div class="grid">
+<div class="field"><label for="basic">Grundbetrag (€)</label><input id="basic" type="number" min="0" step=".01"></div><div class="field"><label for="lesson">Übungsstunde, 45 Min. (€)</label><input id="lesson" type="number" min="0" step=".01"></div>
+<div class="field"><label for="country">Fahrt über Land, 45 Min. (€)</label><input id="country" type="number" min="0" step=".01"></div><div class="field"><label for="highway">Autobahnfahrt, 45 Min. (€)</label><input id="highway" type="number" min="0" step=".01"></div>
+<div class="field"><label for="dark">Fahrt bei Dunkelheit, 45 Min. (€)</label><input id="dark" type="number" min="0" step=".01"></div><div class="field"><label for="theory">Vorstellung Theorieprüfung (€)</label><input id="theory" type="number" min="0" step=".01"></div>
+<div class="field"><label for="practical">Vorstellung praktische Prüfung (€)</label><input id="practical" type="number" min="0" step=".01"></div><div class="field"><label for="otherfees">Weitere Entgelte / Hinweise</label><input id="otherfees" placeholder="z. B. Lernmaterial"></div></div>
+<h3>3. Prüfungsergebnisse (optional)</h3><p class="hint">Nur verifizierte Angaben. Anzahl, Zeitraum und Datenquelle immer mit veröffentlichen.</p><div class="grid">
+<div class="field"><label for="period">Bezugszeitraum</label><input id="period" placeholder="z. B. 1. Halbjahr 2027"></div><div class="field"><label for="count">Anzahl praktische Prüfungen</label><input id="count" type="number" min="0"></div>
+<div class="field"><label for="passrate">Bestanden (%)</label><input id="passrate" type="number" min="0" max="100" step=".1"></div><div class="field"><label for="source">Datenquelle</label><input id="source" placeholder="z. B. Prüfstellen-Auswertung"></div></div>
+<h3>4. Theorieunterricht & digitale Angebote</h3><div class="grid">
+<div class="field"><label for="teaching">Unterrichtsform</label><select id="teaching"><option value="">Bitte auswählen</option><option>Präsenzunterricht</option><option>Online / digitales Selbstlernen</option><option>Hybrid (Präsenz und digital)</option></select></div><div class="field"><label for="app">Lern-App / Plattform</label><input id="app" placeholder="Name der App"></div>
+<div class="field full"><label for="access">Zugang und Nutzung</label><textarea id="access" placeholder="Wie erhalten Fahrschüler Zugang? Gibt es Kosten oder technische Hinweise?"></textarea></div><div class="field full"><label for="notes">Weitere Hinweise</label><textarea id="notes" placeholder="Zusätzliche Informationen"></textarea></div></div>
+
+<h3>5. Wöchentliche Prüfungsmeldung</h3>
+<p class="hint">Trage pro Woche die Anzahl aller abgelegten Prüfungen und die bestandenen Prüfungen ein. Die 6-Monats-Quote wird automatisch aus den Summen berechnet.</p>
+<div class="report-grid">
+<div class="field"><label for="reportWeek">Woche (Datum des Wochenbeginns)</label><input id="reportWeek" type="date"></div>
+<div class="field"><label for="reportNote">Interne Notiz (optional)</label><input id="reportNote" placeholder="z. B. KW 45"></div>
+<div class="field"><label for="theoryTotal">Theorie: Prüfungen insgesamt</label><input id="theoryTotal" type="number" min="0" step="1" value="0"></div>
+<div class="field"><label for="theoryPassed">Theorie: davon bestanden</label><input id="theoryPassed" type="number" min="0" step="1" value="0"></div>
+<div class="field"><label for="practiceTotal">Praxis: Prüfungen insgesamt</label><input id="practiceTotal" type="number" min="0" step="1" value="0"></div>
+<div class="field"><label for="practicePassed">Praxis: davon bestanden</label><input id="practicePassed" type="number" min="0" step="1" value="0"></div>
+</div>
+<div class="buttons"><button id="saveReport">Wochenmeldung speichern</button><button class="alt" id="cancelEdit" style="display:none">Bearbeitung abbrechen</button></div>
+<p id="reportMessage" class="status" aria-live="polite">Die Meldungen werden in dieser Demo lokal in diesem Browser gespeichert.</p>
+<div id="reportStats" class="report-section"></div>
+<div id="reportHistory" class="report-section"></div>
+<h3>6. Website-Vorschau & Export</h3>
+<div class="buttons"><button id="refresh">Vorschau aktualisieren</button><button class="alt" id="download">HTML-Datei herunterladen</button><button class="alt" id="reset">Zurücksetzen</button></div></section>
+<section class="panel"><h2>Vorschau</h2><div id="preview">Hier erscheint deine Informationsseite.</div><h2 style="margin-top:22px">5. Einbettungscode</h2><p class="hint">HTML-Abschnitt kopieren und in den Quellcode deiner Website einfügen. Der Code benötigt keinen externen Dienst.</p><textarea id="code" readonly></textarea><div class="buttons"><button class="alt" id="copy">Code kopieren</button></div><footer>Beta-Version · Alle Eingaben werden nur in diesem Browser verarbeitet und nicht an einen Server gesendet.</footer></section></div></main>
+<script>
+const ids=['school','address','contact','website','classes','basic','lesson','country','highway','dark','theory','practical','otherfees','period','count','passrate','source','teaching','app','access','notes'];const $=x=>document.getElementById(x),v=x=>$(x).value.trim(),e=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));const money=x=>v(x)===''?'':new Intl.NumberFormat('de-DE',{style:'currency',currency:'EUR'}).format(+v(x));
+function make(){let rows=[['Grundbetrag','basic'],['Übungsstunde (45 Min.)','lesson'],['Fahrt über Land (45 Min.)','country'],['Autobahnfahrt (45 Min.)','highway'],['Fahrt bei Dunkelheit (45 Min.)','dark'],['Vorstellung Theorieprüfung','theory'],['Vorstellung praktische Prüfung','practical']].filter(x=>v(x[1])!=='').map(x=>`<tr><td>${x[0]}</td><td>${money(x[1])}</td></tr>`).join('');let classes=v('classes').split(',').map(x=>x.trim()).filter(Boolean).map(x=>`<span>${e(x)}</span>`).join('');let contact=[v('address'),v('contact'),v('website')].filter(Boolean).map(e).join(' · ');let stats=v('passrate')!==''?`<h3>Prüfungsergebnisse</h3><div class="stats"><div class="metric"><b>${e(v('passrate'))} %</b>Bestanden, praktisch</div><div class="metric"><b>${e(v('count')||'—')}</b>Prüfungen</div></div><p class="muted">Zeitraum: ${e(v('period')||'nicht angegeben')} · Quelle: ${e(v('source')||'nicht angegeben')}</p>`:'';let html=`<section class="ft-card"><style>.ft-card{font:15px/1.5 system-ui,Arial;color:#172033;background:#fff;border:1px solid #dce3ec;border-radius:14px;padding:20px;max-width:760px}.ft-card h2{font-size:24px;margin:0 0 4px}.ft-card h3{font-size:16px;margin:20px 0 8px}.ft-card p{margin:7px 0}.ft-card .muted{font-size:12px;color:#64748b}.ft-card .tags span{display:inline-block;background:#eaf0ff;color:#2449a7;padding:4px 8px;border-radius:20px;font-size:12px;margin:3px}.ft-card table{width:100%;border-collapse:collapse}.ft-card td{padding:8px 4px;border-bottom:1px solid #e6ebf2}.ft-card td:last-child{text-align:right;font-weight:bold}.ft-card .stats{display:flex;gap:8px}.ft-card .metric{background:#f1f5fa;padding:10px;border-radius:8px;flex:1}.ft-card .metric b{display:block;font-size:20px}@media(max-width:480px){.ft-card .stats{display:block}}</style><h2>${e(v('school')||'Deine Fahrschule')}</h2>${contact?`<p class="muted">${contact}</p>`:''}${classes?`<div class="tags">${classes}</div>`:''}${rows?`<h3>Preise</h3><table>${rows}</table>`:''}${v('otherfees')?`<p>${e(v('otherfees'))}</p>`:''}${stats}${v('teaching')||v('app')||v('access')?`<h3>Theorieunterricht & digitales Lernen</h3><p>${e(v('teaching'))}</p>${v('app')?`<p><b>Lernplattform:</b> ${e(v('app'))}</p>`:''}${v('access')?`<p>${e(v('access')).replace(/\n/g,'<br>')}</p>`:''}`:''}${v('notes')?`<h3>Weitere Hinweise</h3><p>${e(v('notes')).replace(/\n/g,'<br>')}</p>`:''}${publicReportSummary()}<p class="muted" style="margin-top:18px">Angaben bitte vor Veröffentlichung auf Aktualität prüfen. Externe Prüfstellengebühren können zusätzlich anfallen.</p></section>`;return html}
+
+const REPORT_KEY='fahrschultransparenz_weekly_reports_v1';
+let reports=JSON.parse(localStorage.getItem(REPORT_KEY)||'[]');
+let editingReportId=null;
+const today=new Date();
+const monday=new Date(today);monday.setDate(today.getDate()-((today.getDay()+6)%7));monday.setHours(12,0,0,0);
+$('reportWeek').value=monday.toISOString().slice(0,10);
+function saveReports(){localStorage.setItem(REPORT_KEY,JSON.stringify(reports))}
+function sixMonthStart(){let d=new Date();d.setHours(0,0,0,0);d.setMonth(d.getMonth()-6);return d}
+function inSixMonths(r){let d=new Date(r.week+'T12:00:00');return d>=sixMonthStart()&&d<=new Date()}
+function aggregate(list,key){return list.reduce((a,r)=>({total:a.total+r[key+'Total'],passed:a.passed+r[key+'Passed']}),{total:0,passed:0})}
+function rate(a){return a.total?Math.round(a.passed/a.total*1000)/10:null}
+function publicReportSummary(){
+ const recent=reports.filter(inSixMonths).sort((a,b)=>a.week.localeCompare(b.week));
+ if(!recent.length)return '';
+ const t=aggregate(recent,'theory'),p=aggregate(recent,'practice');
+ const pct=x=>x.total?`${(x.passed/x.total*100).toLocaleString('de-DE',{maximumFractionDigits:1})} %`:'Keine Daten';
+ return `<h3>Prüfungsergebnisse – rollierende letzte 6 Monate</h3><div class="stats"><div class="metric"><b>${pct(t)}</b>Theorie · ${t.passed} von ${t.total} bestanden</div><div class="metric"><b>${pct(p)}</b>Praxis · ${p.passed} von ${p.total} bestanden</div></div><p class="muted">Grundlage: ${recent.length} wöchentliche Meldungen. Letzte Aktualisierung bei Seitenaufruf.</p>`;
+}
+function renderReports(){
+ const recent=reports.filter(inSixMonths);
+ const t=aggregate(recent,'theory'),p=aggregate(recent,'practice');
+ const fmt=x=>x.total?`${(x.passed/x.total*100).toLocaleString('de-DE',{maximumFractionDigits:1})} %`:'–';
+ $('reportStats').innerHTML=`<h3>Automatischer 6-Monats-Rückblick</h3><div class="stat-grid"><div class="stat-card"><span class="hint">Theorie bestanden</span><strong>${fmt(t)}</strong><span class="status">${t.passed} von ${t.total} Prüfungen</span></div><div class="stat-card"><span class="hint">Praxis bestanden</span><strong>${fmt(p)}</strong><span class="status">${p.passed} von ${p.total} Prüfungen</span></div></div><p class="status">Berücksichtigt werden Meldungen vom ${sixMonthStart().toLocaleDateString('de-DE')} bis heute. ${recent.length} Wochenmeldungen im Zeitraum.</p>`;
+ const sorted=[...reports].sort((a,b)=>b.week.localeCompare(a.week));
+ $('reportHistory').innerHTML=`<h3>Gespeicherte Wochenmeldungen</h3>${sorted.length?`<table class="report-list"><thead><tr><th>Woche ab</th><th>Theorie</th><th>Praxis</th><th>Aktion</th></tr></thead><tbody>${sorted.map(r=>`<tr><td>${new Date(r.week+'T12:00:00').toLocaleDateString('de-DE')}</td><td>${r.theoryPassed}/${r.theoryTotal}</td><td>${r.practicePassed}/${r.practiceTotal}</td><td><button class="mini-btn" data-edit="${r.id}">Bearbeiten</button><button class="mini-btn" data-delete="${r.id}">Löschen</button></td></tr>`).join('')}</tbody></table>`:'<p class="status">Noch keine Wochenmeldungen vorhanden.</p>'}`;
+ $('reportHistory').querySelectorAll('[data-edit]').forEach(b=>b.onclick=()=>editReport(b.dataset.edit));
+ $('reportHistory').querySelectorAll('[data-delete]').forEach(b=>b.onclick=()=>{if(confirm('Diese Wochenmeldung löschen?')){reports=reports.filter(r=>r.id!==b.dataset.delete);saveReports();renderReports();update()}});
+}
+function resetReportForm(){editingReportId=null;$('reportWeek').value=monday.toISOString().slice(0,10);['theoryTotal','theoryPassed','practiceTotal','practicePassed'].forEach(id=>$(id).value='0');$('reportNote').value='';$('saveReport').textContent='Wochenmeldung speichern';$('cancelEdit').style.display='none'}
+function editReport(id){const r=reports.find(x=>x.id===id);if(!r)return;editingReportId=id;$('reportWeek').value=r.week;$('reportNote').value=r.note||'';$('theoryTotal').value=r.theoryTotal;$('theoryPassed').value=r.theoryPassed;$('practiceTotal').value=r.practiceTotal;$('practicePassed').value=r.practicePassed;$('saveReport').textContent='Änderungen speichern';$('cancelEdit').style.display='inline-block';$('reportWeek').scrollIntoView({behavior:'smooth',block:'center'})}
+$('saveReport').onclick=()=>{
+ const week=$('reportWeek').value;
+ const vals=['theoryTotal','theoryPassed','practiceTotal','practicePassed'].map(id=>Number($(id).value));
+ if(!week||vals.some(x=>!Number.isInteger(x)||x<0)||vals[1]>vals[0]||vals[3]>vals[2]){$('reportMessage').textContent='Bitte gültige Zahlen eingeben. Bestanden darf nicht größer als insgesamt sein.';$('reportMessage').className='status warning';return}
+ if(new Date(week+'T12:00:00')>new Date()){ $('reportMessage').textContent='Ein zukünftiges Wochen-Datum ist nicht möglich.';return}
+ const duplicate=reports.find(r=>r.week===week&&r.id!==editingReportId);
+ if(duplicate&&!editingReportId){$('reportMessage').textContent='Für diese Woche gibt es bereits eine Meldung. Bitte bearbeite den vorhandenen Eintrag.';$('reportMessage').className='status warning';return}
+ const r={id:editingReportId||('r_'+Date.now()),week,note:$('reportNote').value.trim(),theoryTotal:vals[0],theoryPassed:vals[1],practiceTotal:vals[2],practicePassed:vals[3]};
+ if(editingReportId)reports=reports.map(x=>x.id===editingReportId?r:x);else reports.push(r);
+ saveReports();resetReportForm();renderReports();update();$('reportMessage').textContent='Wochenmeldung gespeichert. Die 6-Monats-Auswertung wurde aktualisiert.';$('reportMessage').className='status success';
+};
+$('cancelEdit').onclick=resetReportForm;
+
+function update(){let h=make();$('preview').innerHTML=h;$('code').value=h}ids.forEach(id=>$(id).addEventListener('input',update));$('refresh').onclick=update;$('copy').onclick=async()=>{update();try{await navigator.clipboard.writeText($('code').value);$('copy').textContent='Kopiert ✓'}catch(err){$('code').select();document.execCommand('copy');$('copy').textContent='Code markiert'}};$('download').onclick=()=>{let doc='<!doctype html><html lang="de"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+e(v('school')||'Fahrschule')+'</title><body style="margin:24px;background:#f3f6fb">'+make()+'</body></html>';let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([doc],{type:'text/html'}));a.download='fahrschul-transparenz.html';a.click();URL.revokeObjectURL(a.href)};$('reset').onclick=()=>{if(confirm('Alle Eingaben zurücksetzen?')){ids.forEach(id=>$(id).value='');update()}};update();
+</script></body></html>
